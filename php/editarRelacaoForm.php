@@ -15,17 +15,26 @@
 </head>
 <body>
 
-	<?php include("menuSecretaria.php"); ?>
+	<?php include("menuSecretaria.php");
+	
+	require_once("conexaoBanco.php");
+	$idRelacao=$_POST['idRelacao'];
+	$comando="SELECT * FROM relacoes WHERE idRelacao=".$idRelacao;
+	$resultado=mysqli_query($conexao,$comando);
+	$r=mysqli_fetch_assoc($resultado);
+
+	
+	?>
 	
     <h3 class="titulos">Edição de relação</h3>  
 
 	<form action="editarRelacao.php" method="POST">
-        <input type="hidden" name="idRelacao" value="">
+        <input type="hidden" name="idRelacao" value="<?=$r['idRelacao']?>">
 
 		<div class="form-group">
 		  <label class="control-label">Descrição da relação *</label>  
 		<div class="col-md-4">
-		 <input type="text" value="" name="descricao" class="form-control" >
+		 <input type="text" value="<?=$r['descricao']?>" name="descricao" class="form-control" >
 		</div>
 		</div>
 		
