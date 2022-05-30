@@ -6,7 +6,7 @@
     $comando="UPDATE relacoes SET descricao='".$descricao."' WHERE idRelacao=".$idRelacao;
 
 
-    // echo $comando;
+    echo $comando;
 
     $resultado=mysqli_query($conexao,$comando);
 
