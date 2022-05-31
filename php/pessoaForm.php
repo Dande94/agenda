@@ -139,12 +139,14 @@
 			<th>Relação</th>
 			<th>Ações</th>
 		</tr>
-		 <tr>
-		 	 <td> ♥ </td>
-			 <td> Joana </td>
-			 <td> Magalhães </td>
-			 <td> jomagalhaes@gmail.com </td>
-			 <td> Irmã </td>
+			<?php
+			$comando="SELECT p.*, r.descricao FROM pessoas p INNER JOIN relacoes r ON p.relacoes_idRelacao=r.idRelacao";
+			// echo $comando;
+			if(isset($_GET['pesquisa']) && $_GET['pesquisa']!=""){
+				$comando = $comando. "WHERE p.nome LIKE '".$pesquisa."%'";
+			}
+			
+			?>
 			 <td>
 			<form action="editarPessoaForm.php" method="POST" class="formAcao">
 				<input type="hidden" name="idPessoa" value="<?=$p['idPessoa']?>">
