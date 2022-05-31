@@ -87,6 +87,19 @@
 		  <label class="control-label">Relação *</label>  
 		<div class="col-md-8">
 		 <select name="idRelacao" class="form-control">
+			 <?php
+			 require_once("conexaoBanco.php");
+			 $comando="SELECT * FROM relacoes";
+			 $resultado=mysqli_query($conexao,$comando);
+			 $relacoesRetornadas=array();
+			 while($r  = mysqli_fetch_assoc($resultado)){
+				 array_push($relacoesRetornadas, $r);
+			 }
+			 foreach($relacoesRetornadas as  $r){
+				 //criar um option para cada relação;
+				 echo "<option value='".$r['idRelacao']."'>".$r['descricao']."</option>";
+			 }
+			 ?>
 		 </select>
 		</div>
 		</div>
