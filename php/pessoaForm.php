@@ -149,18 +149,22 @@
 			// echo $comando;
 			$resultado=mysqli_query($conexao,$comando);
 			$pessoasRetornadas=array();
-			while($p = mysqli_fetch_assoc($resultado)){
-				array_push($pessoasRetornadas, $p);
-			}
-			foreach($pessoasRetornadas as $p){
-				echo $p['idPessoa']."<br>";
-				echo $p['nome']."<br>";
-				echo $p['sobrenome']."<br>";
-				echo $p['email']."<br>";
-				echo $p['foto']."<br>";
-				echo $p['relacoes_idRelacao']."<br>";
-				echo $p['descricao']."<br>";
-			}
+			$linhas=mysqli_num_rows($resultado);
+			if($linhas==0){
+				echo"<tr><td colspan='6'>Nenhuma pessoa foi encontrada!</td></tr>";
+			}else{
+				while($p = mysqli_fetch_assoc($resultado)){
+					array_push($pessoasRetornadas, $p);
+				}
+				foreach($pessoasRetornadas as $p){
+					echo "<tr>";
+					echo "<td><img src='../fotos/".$p['foto']."' class='imagensConsulta'></td>";
+					echo "<td>".$p['nome']."</td>";
+					echo "<td>".$p['sobrenome']."</td>";
+					echo "<td>".$p['email']."</td>";
+					echo "<td>".$p['descricao']."</td>";
+
+		
 			?>
 			 <td>
 			<form action="editarPessoaForm.php" method="POST" class="formAcao">
@@ -181,6 +185,10 @@
 			</form>			
 			</td>
 		</tr>
+		<?php
+				}
+			}
+		?>
 	</table>
 	</div>
 	</div>
