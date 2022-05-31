@@ -143,9 +143,24 @@
 			$comando="SELECT p.*, r.descricao FROM pessoas p INNER JOIN relacoes r ON p.relacoes_idRelacao=r.idRelacao";
 			// echo $comando;
 			if(isset($_GET['pesquisa']) && $_GET['pesquisa']!=""){
+				$pesquisa=$_GET['pesquisa'];
 				$comando = $comando. "WHERE p.nome LIKE '".$pesquisa."%'";
 			}
-			
+			// echo $comando;
+			$resultado=mysqli_query($conexao,$comando);
+			$pessoasRetornadas=array();
+			while($p = mysqli_fetch_assoc($resultado)){
+				array_push($pessoasRetornadas, $p);
+			}
+			foreach($pessoasRetornadas as $p){
+				echo $p['idPessoa']."<br>";
+				echo $p['nome']."<br>";
+				echo $p['sobrenome']."<br>";
+				echo $p['email']."<br>";
+				echo $p['foto']."<br>";
+				echo $p['relacoes_idRelacao']."<br>";
+				echo $p['descricao']."<br>";
+			}
 			?>
 			 <td>
 			<form action="editarPessoaForm.php" method="POST" class="formAcao">
