@@ -17,29 +17,38 @@
 
     <?php include("menuSecretaria.php"); ?>    
 
-    <h3 class="titulos">Edição de pessoas</h3>      
+    <h3 class="titulos">Edição de pessoas</h3>     
+	<?php
+		require_once("conexaoBanco.php");
 
+		$idPessoa=$_POST['idPessoa'];
+		$comando="SELECT * FROM pessoas WHERE idPessoa=".$idPessoa;
+		$resultado=mysqli_query($conexao,$comando);
+		$p=mysqli_fetch_assoc($resultado);
+
+
+	?> 
 	<form action="editarPessoa.php" method="POST" enctype="multipart/form-data">
 
-        <input type="hidden" name="idPessoa" value="">
+        <input type="hidden" name="idPessoa" value="<?=$p['idPessoa']?>">
 		<div class="form-group">
 		  <label class="control-label">Nome *</label>  
 		<div class="col-md-8">
-		 <input type="text" value="" name="nome" accept="image/*" class="form-control" >
+		 <input type="text" value="<?=$p['nome']?>" name="nome" accept="image/*" class="form-control" >
 		</div>
 		</div>
 		
 		 <div class="form-group">
 		  <label class="control-label">Sobrenome *</label>  
 		<div class="col-md-8">
-		 <input type="text" value="" name="sobrenome" class="form-control" >
+		 <input type="text" value="<?=$p['sobrenome']?>" name="sobrenome" class="form-control" >
 		</div>
 		</div>
 		
 		<div class="form-group">
 		  <label class="control-label">E-mail *</label>  
 		<div class="col-md-8">
-		 <input type="text" value="" name="email" class="form-control" >
+		 <input type="text" value="<?=$p['email']?>" name="email" class="form-control" >
 		</div>
 		</div>
 		
@@ -54,7 +63,22 @@
 		  <label class="control-label">Relação *</label>  
 		<div class="col-md-8">
 		 <select name="idRelacao" class="form-control">
-		 	
+		 	<?php
+			  require_once("conexaoBanco.php");
+			  $comando="SELECT * FROM relacoes";
+			  $resultado=mysqli_query($conexao,$comando);
+			  $relacoesRetornadas=array();
+			  while($r  = mysqli_fetch_assoc($resultado)){
+				  array_push($relacoesRetornadas, $r);
+			  }
+			  foreach($relacoesRetornadas as  $r){
+				  if($p['relacoes_idRelacao']==$r['idRelacao']){
+					echo "<option selected value='".$r['idRelacao']."'>".$r['descricao']."</option>";
+				  }else{
+					  echo "<option value='".$r['idRelacao']."'>".$r['descricao']."</option>";
+				  }
+			  }
+			 ?>
 		 </select>
 		</div>
 		</div>

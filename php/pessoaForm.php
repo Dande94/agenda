@@ -144,7 +144,7 @@
 			// echo $comando;
 			if(isset($_GET['pesquisa']) && $_GET['pesquisa']!=""){
 				$pesquisa=$_GET['pesquisa'];
-				$comando = $comando. "WHERE p.nome LIKE '".$pesquisa."%'";
+				$comando = $comando. " WHERE p.nome LIKE '".$pesquisa."%'";
 			}
 			// echo $comando;
 			$resultado=mysqli_query($conexao,$comando);
