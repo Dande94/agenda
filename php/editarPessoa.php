@@ -14,7 +14,9 @@ if($foto!=""){
     $comando="SELECT foto from pessoas WHERE idPessoa=".$idPessoa;
     $resultado=mysqli_query($conexao,$comando);
     $fotoAntiga=mysqli_fetch_assoc($resultado);
-    unlink("../fotos/".$fotoAntiga['foto']);
+    if($fotoAntiga['foto']!=""){
+        unlink("../fotos/".$fotoAntiga['foto']);
+    }
 
     $extesao=strtolower(substr($foto,-4));
     $novoNomeFoto=date("Y.m.d-H.i.s").$extesao;
