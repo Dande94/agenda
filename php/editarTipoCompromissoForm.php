@@ -14,17 +14,26 @@
 
 </head>
 <body>
-    
-	<?php include("menuSecretaria.php"); ?>    
-	
+    <?php include("menuSecretaria.php"); ?>    
+
+    <?php
+        require_once("conexaoBanco.php");
+        $idTipo=$_POST['idTipo'];
+
+        $comando="SELECT * FROM tiposcompromissos WHERE idTipo=".$idTipo;
+        $resultado=mysqli_query($conexao,$comando);
+        $t=mysqli_fetch_assoc($resultado);
+    ?>
+
     <h3 class="titulos">Edição de tipo de compromisso</h3>  
 
 	<form action="editarTipoCompromisso.php" method="POST">
-        <input type="hidden" value="" name="idTipo">
+
+        <input type="hidden" value="<?=$t['idTipo']?>" name="idTipo">
 		<div class="form-group">
 		  <label class="control-label">Descrição do compromisso *</label>  
-		<div class="col-md-4">
-		 <input type="text" value="" name="tipo" class="form-control" >
+		<div class="col-md-8">
+		 <input type="text" value="<?=$t['descricao']?>" name="descricao" class="form-control" >
 		</div>
 		</div>
 		
@@ -35,5 +44,9 @@
 			<button  class="btn btn-success" type="submit">Cadastrar</button>			
 		</div>
 		</div>
+
+       
 	</form>
     </body>
+
+    
