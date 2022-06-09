@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['nivel'])&& $_SESSION['nivel']=="1"){
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -79,7 +83,8 @@
 					echo "<td>".$c['local']."</td>";
 					echo "<td>".$c['bairro']."</td>";
 					echo "<td>".$c['cidade']."</td>";
-					echo "<td> Santa Catarina</td>";
+					echo "<td>".$c['estado']."</td>";
+					// echo "<td> Santa Catarina</td>";
 					echo "<td>".$c['numero']."</td>";				
 			?>
 
@@ -115,3 +120,9 @@
 		
 </body>
 </html>
+<?php
+	}else{
+		header("Location: alertaEfetuarLogin.html");
+	}
+
+?>

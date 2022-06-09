@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['nivel'])&& $_SESSION['nivel']=="1"){
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -35,7 +39,7 @@
     <div class="form-group row">
             <div class="col-md-8">
             <label class="control-label">Tipo *</label>
-            <select name="idTipo" class="form-control">
+            <select name="idTipo"  class="form-control">
             <?php
                 require_once("conexaoBanco.php");
                 $comando="SELECT * FROM tiposcompromissos";
@@ -206,3 +210,9 @@
 
 </body>
 </html>
+<?php
+	}else{
+		header("Location: alertaEfetuarLogin.html");
+	}
+
+?>

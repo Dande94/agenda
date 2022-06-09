@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['nivel'])&& $_SESSION['nivel']=="1"){
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -126,9 +130,7 @@
 
             <div class="col-md-3">
             <label class="control-label">Estado</label>
-            <select name="estado" class="form-control" >
-                <option value="1">Santa Catarina</option>
-            </select>
+            <input type="text" id="estado" name="estado" class="form-control">
             </div>
 
 
@@ -138,7 +140,7 @@
         <div class="form-group row">		    
             <div class="col-md-2">
             <label class="control-label">Cidade</label>
-            <input type="text" name="cidade" class="form-control">
+            <input type="text" id="cidade" name="cidade" class="form-control">
             
             </div>
             <div class="col-md-6">
@@ -271,3 +273,9 @@
     
 </body>
 </html>
+<?php
+	}else{
+		header("Location: alertaEfetuarLogin.html");
+	}
+
+?>

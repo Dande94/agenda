@@ -41,13 +41,14 @@ function preencherEndereco(cep){
     $("#rua").val("");
     $("#bairro").val("");
     $("#cidade").val("");
+    $("#estado").val("");
 
     $.getJSON("https://viacep.com.br/ws/"+cep+"/json/?callback=?", function(dados) {
         if (!("erro" in dados)) {       
             $("#rua").val(dados.logradouro);
             $("#bairro").val(dados.bairro);
             $("#cidade").val(dados.localidade);                              
-            $("#estado").val(dados.estado);                              
+            $("#estado").val(dados.uf);                              
         }else {                        
             alert("CEP não encontrado! Preencha o endereço manualmente.");
         }
